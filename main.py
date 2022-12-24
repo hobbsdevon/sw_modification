@@ -1,3 +1,7 @@
+#Modified Smith-Waterman algorithm
+#Authors: Devon Hobbs, William DeBliek
+#23 December 2022
+
 import numpy as np
 
 #outputs the traceback matrix and the scoring matrix
@@ -9,10 +13,10 @@ def score_traceback_matrixs(seq1, seq2, match, mismatch, gap):
     score_matrix = np.zeros((rows, cols))
     traceback_matrix = []
 
-    for i in range(rows):                   #
-        traceback_matrix.append([])         #Best I could do. Hope one of you can do better.
-        for j in range(cols):               #This makes a nested list.
-            traceback_matrix[i].append("")  #Numpy didn't like my use of strings matrixes.
+    for i in range(rows):
+        traceback_matrix.append([])
+        for j in range(cols):
+            traceback_matrix[i].append("")
 
     traceback_matrix[0][0] = "S"
     score_matrix[0][0] = 0
@@ -85,11 +89,6 @@ def find_traceback(seq1, seq2, score_matrix, traceback_matrix, begin_index = [0,
 
         nested_match_or_gap_list[i][0] = ''.join(aligns1)[::-1]
         nested_match_or_gap_list[i][1] = ''.join(aligns2)[::-1]
-        # print("INFO")
-        # print(max_index[0])
-        # print(seq2_count)
-        # print(max_index[1])
-        # print(seq1_count)
         end_indexes.append([max_index[0]+begin_index[0], max_index[1]+begin_index[1]])
         if i == 0:
             start_index = [max_index[0] - seq2_count + begin_index[0],  max_index[1] - seq1_count + begin_index[1]]
